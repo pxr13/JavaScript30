@@ -1,10 +1,12 @@
 const root = document.documentElement;
-const base = document.querySelector('#base');
-const spacing = document.querySelector('#spacing');
-const blur = document.querySelector('#blur');
+const inputElements = Array.from(document.querySelectorAll('input'));
 
 function getVal(element) {
   return element.value;
+}
+
+function getAttributeName(el) {
+  return el.getAttribute('name');
 }
 
 function calcBlur(inputVal) {
@@ -12,24 +14,26 @@ function calcBlur(inputVal) {
   return blurVal;
 }
 
-function calcSpacing(inputVal) {
-  let spacingVal = inputVal * 0.5; // 0.5 used to scale spacing input val to px val
-  return spacingVal;
+function setSpacingProperty(inputVal) {
+  return root.style.setProperty('--spacing', `${inputVal}px`);
 }
 
-spacing.addEventListener('input', () => {
-  let inputVal = getVal(spacing);
-  let spacingVal = calcSpacing(inputVal);
-  root.style.setProperty('--spacing', `${spacingVal}px`);
-});
-
-blur.addEventListener('input', () => {
-  let inputVal = getVal(blur);
+function setBlurProperty(inputVal) {
   let blurVal = calcBlur(inputVal);
   root.style.setProperty('--blur', `${blurVal}px`);
-})
+}
 
-base.addEventListener('input', () => {
-  let inputVal = getVal(base);
-  root.style.setProperty('--base-color', `${inputVal}`)
-});
+function setBaseProperty(inputVal) {
+  return root.style.setProperty('--base', `${inputVal}`);
+}
+
+function setVal() {
+  let inputVal = getVal(this);
+  let attributeName = getAttributeName(this);
+
+  if (attributeName === 'spacing') { setSpacingProperty(inputVal) }
+  if (attributeName === 'blur') { setBlurProperty(inputVal) }
+  if (attributeName === 'base') { setBaseProperty(inputVal) }
+}
+
+inputElements.forEach(el => el.addEventListener('input', setVal));
