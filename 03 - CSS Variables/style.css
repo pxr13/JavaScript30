@@ -4,6 +4,8 @@
 
 :root {
   --base-color: #ffc600;
+  --spacing: translate(0px, 0px);
+  --blur: blur(0px);
 }
 
 body {
@@ -22,7 +24,8 @@ input {
 img {
   width: 550px;
   height: 350px;
-  background-color: yellow;
+  transform: var(--spacing);
+  filter: var(--blur);
 }
 
 .hl {
@@ -34,8 +37,8 @@ img {
 }
 
 .img-border {
-  margin: 0 auto;
   padding: 20px;
+  margin: 0 auto;
   width: 550px;
   height: 350px;
   background-color: var(--base-color);
