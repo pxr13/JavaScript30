@@ -63,7 +63,9 @@ function challenge5() {
 
 // 6. create a list of Boulevards in Paris that contain 'de' anywhere in the name
 // https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris
-
+// (function challenge6() {
+//
+// })()
 
   const people = ['Beck, Glenn', 'Becker, Carl', 'Beckett, Samuel', 'Beddoes, Mick', 'Beecher, Henry', 'Beethoven, Ludwig', 'Begin, Menachem', 'Belloc, Hilaire', 'Bellow, Saul', 'Benchley, Robert', 'Benenson, Peter', 'Ben-Gurion, David', 'Benjamin, Walter', 'Benn, Tony', 'Bennington, Chester', 'Benson, Leana', 'Bent, Silas', 'Bentsen, Lloyd', 'Berger, Ric', 'Bergman, Ingmar', 'Berio, Luciano', 'Berle, Milton', 'Berlin, Irving', 'Berne, Eric', 'Bernhard, Sandra', 'Berra, Yogi', 'Berry, Halle', 'Berry, Wendell', 'Bethea, Erin', 'Bevan, Aneurin', 'Bevel, Ken', 'Biden, Joseph', 'Bierce, Ambrose', 'Biko, Steve', 'Billings, Josh', 'Biondo, Frank', 'Birrell, Augustine', 'Black, Elk', 'Blair, Robert', 'Blair, Tony', 'Blake, William'];
 
@@ -89,9 +91,7 @@ function sortStrings(prev, curr) {
   return output;
 }
 
-function challenge6() {
-  // loop through array
-  // compare last names and sort ascending
+function challenge7() {
   const sortedArr =
     people.sort((prev, curr) => {
       return sortStrings(prev, curr);
@@ -102,3 +102,17 @@ function challenge6() {
 // 8. Reduce Exercise
 // Sum up the instances of each of these
 const data = ['car', 'car', 'truck', 'truck', 'bike', 'walk', 'car', 'van', 'bike', 'walk', 'car', 'van', 'car', 'truck' ];
+
+function addToObj(obj, item) {
+  return obj[item] ? obj[item]++ : obj[item] = 1;
+}
+
+function challenge8() {
+  let obj = {};
+
+  const reducedArr =
+    data.forEach(item => {
+      return addToObj(obj, item);
+    })
+  return obj;
+}
