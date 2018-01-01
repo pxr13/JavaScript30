@@ -1,8 +1,7 @@
 const spacing = document.querySelector('#spacing');
-const base = document.querySelector('#base')
+const root = document.documentElement;
 
 base.addEventListener('input', () => {
-  console.log(base.value);
+  let currentColor = base.value;
+  root.style.setProperty('--base-color', `${currentColor}`)
 });
-
-// as base color value changes, change img-background color and 'JS'
