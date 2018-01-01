@@ -20,13 +20,13 @@ function calcSpacing(inputVal) {
 spacing.addEventListener('input', () => {
   let inputVal = getVal(spacing);
   let spacingVal = calcSpacing(inputVal);
-  root.style.setProperty('--spacing', `translate(${spacingVal}px, ${spacingVal}px)`);
+  root.style.setProperty('--spacing', `${spacingVal}px`);
 });
 
 blur.addEventListener('input', () => {
   let inputVal = getVal(blur);
   let blurVal = calcBlur(inputVal);
-  root.style.setProperty('--blur', `blur(${blurVal}px)`);
+  root.style.setProperty('--blur', `${blurVal}px`);
 })
 
 base.addEventListener('input', () => {
