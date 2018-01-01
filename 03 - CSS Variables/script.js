@@ -8,12 +8,12 @@ function getVal(element) {
 }
 
 function calcBlur(inputVal) {
-  let blurVal =  inputVal * 0.2; // 0.2 used to scale blur val in px
+  let blurVal =  inputVal * 0.2; // 0.2 used to scale blur input val to px val
   return blurVal;
 }
 
 function calcSpacing(inputVal) {
-  let spacingVal = inputVal * 0.5;
+  let spacingVal = inputVal * 0.5; // 0.5 used to scale spacing input val to px val
   return spacingVal;
 }
 
