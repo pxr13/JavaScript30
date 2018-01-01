@@ -1,39 +1,12 @@
 const root = document.documentElement;
-const inputElements = Array.from(document.querySelectorAll('input'));
-
-function getVal(element) {
-  return element.value;
-}
-
-function getAttributeName(el) {
-  return el.getAttribute('name');
-}
-
-function calcBlur(inputVal) {
-  let blurVal =  inputVal * 0.2; // 0.2 used to scale blur input val to px val
-  return blurVal;
-}
-
-function setSpacingProperty(inputVal) {
-  return root.style.setProperty('--spacing', `${inputVal}px`);
-}
-
-function setBlurProperty(inputVal) {
-  let blurVal = calcBlur(inputVal);
-  root.style.setProperty('--blur', `${blurVal}px`);
-}
-
-function setBaseProperty(inputVal) {
-  return root.style.setProperty('--base', `${inputVal}`);
-}
+const inputs = Array.from(document.querySelectorAll('.controls input'));
 
 function setVal() {
-  let inputVal = getVal(this);
-  let attributeName = getAttributeName(this);
+  let suffix = this.dataset.sizing || '';
+  let inputVal = this.value + suffix;
+  let name = this.name;
 
-  if (attributeName === 'spacing') { setSpacingProperty(inputVal) }
-  if (attributeName === 'blur') { setBlurProperty(inputVal) }
-  if (attributeName === 'base') { setBaseProperty(inputVal) }
+  root.style.setProperty(`--${name}`, `${inputVal}`)
 }
 
-inputElements.forEach(el => el.addEventListener('input', setVal));
+inputs.forEach(el => el.addEventListener('input', setVal));
