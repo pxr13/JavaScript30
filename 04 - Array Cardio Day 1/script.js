@@ -44,15 +44,11 @@ function challenge3() {
 
 // Array.prototype.reduce()
 // 4. How many years did all the inventors live?
-function getAge(inventor) {
+const getAge = (inventor) => {
   return inventor.passed - inventor.year;
 }
 
-function challenge4() {
-  const reducedArr =
-    inventors.reduce((acc, curr) => acc + getAge(curr), 0);
-  return reducedArr;
-}
+const totalYears = inventors.reduce((total, inventor) => total + getAge(inventor), 0);
 
 // 5. Sort the inventors by years lived
 function challenge5() {
@@ -63,35 +59,30 @@ function challenge5() {
 
 // 6. create a list of Boulevards in Paris that contain 'de' anywhere in the name
 // https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris
-// (function challenge6() {
-//
-// })()
+  const streets = ["Boulevards of Paris", "City walls of Paris", "Thiers wall", "Wall of Charles V", "Wall of Philip II Augustus", "City gates of Paris", "Haussmann's renovation of Paris", "Boulevards of the Marshals", "Boulevard Auguste-Blanqui", "Boulevard Barbès", "Boulevard Beaumarchais", "Boulevard de l'Amiral-Bruix", "Boulevard des Capucines", "Boulevard de la Chapelle", "Boulevard de Clichy", "Boulevard du Crime", "Boulevard Haussmann", "Boulevard de l'Hôpital", "Boulevard des Italiens", "Boulevard de la  Madeleine", "Boulevard de Magenta", "Boulevard Montmartre", "Boulevard du Montparnasse", "Boulevard Raspail", "Boulevard Richard-Lenoir", "Boulevard de Rochechouart", "Boulevard Saint-Germain", "Boulevard Saint-Michel", "Boulevard de Sébastopol", "Boulevard de Strasbourg", "Boulevard du Temple", "Boulevard Voltaire", "Boulevard de la Zone"]
+
+function listCriteria(street) {
+  return street.includes('de');
+}
+
+const filteredList = (streets) => {
+  return streets.filter(street => listCriteria(street));
+}
 
   const people = ['Beck, Glenn', 'Becker, Carl', 'Beckett, Samuel', 'Beddoes, Mick', 'Beecher, Henry', 'Beethoven, Ludwig', 'Begin, Menachem', 'Belloc, Hilaire', 'Bellow, Saul', 'Benchley, Robert', 'Benenson, Peter', 'Ben-Gurion, David', 'Benjamin, Walter', 'Benn, Tony', 'Bennington, Chester', 'Benson, Leana', 'Bent, Silas', 'Bentsen, Lloyd', 'Berger, Ric', 'Bergman, Ingmar', 'Berio, Luciano', 'Berle, Milton', 'Berlin, Irving', 'Berne, Eric', 'Bernhard, Sandra', 'Berra, Yogi', 'Berry, Halle', 'Berry, Wendell', 'Bethea, Erin', 'Bevan, Aneurin', 'Bevel, Ken', 'Biden, Joseph', 'Bierce, Ambrose', 'Biko, Steve', 'Billings, Josh', 'Biondo, Frank', 'Birrell, Augustine', 'Black, Elk', 'Blair, Robert', 'Blair, Tony', 'Blake, William'];
 
 // 7. sort Exercise
 // Sort the people alphabetically by last name
-function concatName(fullName) {
-  let lowerCaseArr = fullName.toLowerCase().split(', ');
-  let concattedName = lowerCaseArr[0].concat(lowerCaseArr[1]);
-  return concattedName;
+function getLastName(fullName) {
+  let [lastName, firstName] = fullName.toLowerCase().split(', ');
+  return lastName;
 }
 
 function sortStrings(prev, curr) {
-  let output;
-  if (concatName(prev) < concatName(curr)) {
-    output = -1;
-  }
-  else if (concatName(prev) > concatName(curr)) {
-    output = 1;
-  }
-  else {
-    output = 0;
-  }
-  return output;
+  return getLastName(prev) > getLastName(curr) ? 1 : -1;
 }
 
-function challenge7() {
+const sortByLastName = (people) => {
   const sortedArr =
     people.sort((prev, curr) => {
       return sortStrings(prev, curr);
@@ -103,16 +94,20 @@ function challenge7() {
 // Sum up the instances of each of these
 const data = ['car', 'car', 'truck', 'truck', 'bike', 'walk', 'car', 'van', 'bike', 'walk', 'car', 'van', 'car', 'truck' ];
 
-function addToObj(obj, item) {
-  return obj[item] ? obj[item]++ : obj[item] = 1;
-}
-
-function challenge8() {
-  let obj = {};
-
-  const reducedArr =
-    data.forEach(item => {
-      return addToObj(obj, item);
-    })
+const addToObj = (obj, item) => {
+  if (!obj[item]) {
+    obj[item] = 0;
+  }
+  obj[item]++;
   return obj;
 }
+
+const transportation = (data) => {
+  const finalObj =
+    data.reduce((obj, item) => {
+      return addToObj(obj, item);
+    }, {});
+  return finalObj;
+}
+
+console.log(transportation(data));
